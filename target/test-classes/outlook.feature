@@ -41,11 +41,11 @@ Feature: Outlook sending of an email with a file attachment
   Scenario Outline: Sending an email with blank email textbox
     Given I am on the Outlook Inbox page
     When I press on the New Message button
-    And I enter a subject "test3"
+    And I enter a subject "RaNdOm_SuBjEcT1238704"
     And I choose "<file>" from my computer using the attachment button
     When I press Send
     Then I will get an error message stating I have not entered any recipient
-    And the recipient will not receive an email with subject "test3" and the appropriate file
+    And the email with subject "RaNdOm_SuBjEcT1238704" will not be sent
 
     Examples: 
       | file          |

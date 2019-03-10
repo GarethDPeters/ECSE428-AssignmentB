@@ -41,7 +41,7 @@ public class StepDefinitions {
 	private final String ATTACH_BTN = "Attach";
 	private final String COMPUTER_BTN = "Browse this computer";
 	private final String MOST_RECENT_ITEM = "div.n1O1yKKQnfbPMo9fvZ5QH";
-	
+
 	private final String EMAIL_RECIPIENT_TEXT = "div._1GbKnlrcyAfdgFr9WpTgdU";
 	private final String SUBJECT_TEXT = "span.dJ4kO5HcLAM4x-GXmxP8n";
 	private final String FILE_TEXT = "div._2rAN8ltsKDy-NItWETekFN._1uQGiBv-yESO7W9wcqabjy._2jA_Nob0bnzClVUjNJfDsr";
@@ -181,7 +181,7 @@ public class StepDefinitions {
 			System.out.println("File text not found");
 		}
 	}
-	
+
 	@Then("^the recipient will receive an \"([^\"]*)\" with subject \"([^\"]*)\" and the appropriate \"([^\"]*)\" and \"([^\"]*)\"$")
 	public void recipientWillReceiveTwoFile(String email, String subject, String file1, String file2) throws Throwable {
 		navigateToMostRecentMsg();
@@ -216,7 +216,7 @@ public class StepDefinitions {
 			List<WebElement> fileTexts = (new WebDriverWait(driver, 10))
 					.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(FILE_TEXT)));
 			System.out.print("Found!\n");
-			
+
 			Assert.assertTrue(fileTexts.get(0).getText().equals(file1));
 			Assert.assertTrue(fileTexts.get(1).getText().equals(file2));
 		} catch (Exception e) {
@@ -239,8 +239,24 @@ public class StepDefinitions {
 		}
 	}
 
+	@And("^the email with subject \"([^\\\"]*)\" will not be sent$")
+	public void emailNotSent(String subject) throws Throwable {
+		navigateToMostRecentMsg();
+		// See if the subject entry exists, if so, check if it's a different subject
+		try {
+			System.out.println("Attempting to find subject text... ");
+			WebElement subjectText = (new WebDriverWait(driver, 10))
+					.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(SUBJECT_TEXT)));
+			System.out.print("Found!\n");
+
+			Assert.assertFalse(subjectText.getText().equals(subject));
+		} catch (Exception e) {
+			System.out.println("Subject text not found");
+		}
+	}
+
 	private void setupSeleniumWebDrivers() throws MalformedURLException {
-		//Set Selenium Web Driver to be Chrome
+		// Set Selenium Web Driver to be Chrome
 		if (driver == null) {
 			System.out.println("Setting up ChromeDriver... ");
 			System.setProperty("webdriver.chrome.driver", PATH_TO_CHROME_DRIVER);
@@ -301,7 +317,7 @@ public class StepDefinitions {
 		Robot r = new Robot();
 		Thread.sleep(1000);
 
-		//Press each key one by one to find file in file explorer
+		// Press each key one by one to find file in file explorer
 		for (int i = 0; i < filepath.length(); i++) {
 			int key = KeyEvent.getExtendedKeyCodeForChar(filepath.charAt(i));
 			r.keyPress(key);
@@ -343,7 +359,7 @@ public class StepDefinitions {
 		}
 	}
 
-	//Close browser once finished
+	// Close browser once finished
 	@After
 	public void closeBrowser() {
 		driver.close();

@@ -1,5 +1,6 @@
 Feature: Outlook sending of an email with a file attachment
 
+
   # Normal flow
   Scenario Outline: Composing and sending a new email with a file attachment from computer
     Given I am on the Outlook Inbox page

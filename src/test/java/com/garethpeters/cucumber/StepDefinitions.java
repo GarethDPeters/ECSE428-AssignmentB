@@ -25,7 +25,7 @@ public class StepDefinitions {
 	private final String PATH_TO_CHROME_DRIVER = "/home/gareth/Downloads/chromedriver_linux64/chromedriver";
 	private final String OUTLOOK_URL = "https://outlook.live.com/mail/inbox";
 
-	private final String SENDER = "ecse428dummy@hotmail.com";
+	private final String SENDER = "ecse428dummy3@hotmail.com";
 	private final String SENDER_PASS = "dummy321";
 
 	private final String SIGN_IN_BTN_FIRST = "officeHeaderMenu";
